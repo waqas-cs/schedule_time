@@ -1,0 +1,15 @@
+.applyButton{
+    margin: auto;
+}
+.applyButton button{
+    padding: 8px 24px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: yellow;
+}
+.applyButton button:hover{
+    cursor: pointer;
+    background-color: rgb(226, 226, 113);
+}

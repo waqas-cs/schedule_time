@@ -1,0 +1,26 @@
+.monthYear{
+    margin: 5px auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.monthYear h4{
+    display: inline-block;
+    width: 85%;
+}
+.monthYear img{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+}
+.selectDay{
+    padding: 5px 10px;
+}
+.nameOfDay table{
+    width: 100%;
+}
+.nameOfDay span{
+    text-align: center;
+}
