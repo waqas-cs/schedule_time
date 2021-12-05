@@ -51,6 +51,7 @@ const Calendar = () => {
   const [calendarData, setCalendarData] = useState(
     createCalendarRows(firstDayOfMonth.getDay(), lastDayOfMonth.getDate())
   );
+  const [selected, setSelected] = useState(null)
 
   const decrementMonthAction = () => {
     setMonth((month) => (month === 0 ? (month = 11) : --month));
@@ -61,7 +62,7 @@ const Calendar = () => {
     }
     setFirstDayOfMonth(getFirstDayOfMonth(currentDate));
     setLastDayOfMonth(getLastDayOfMonth(currentDate));
-    setCalendarData(firstDayOfMonth.getDay(), lastDayOfMonth.getDate());
+    setCalendarData(createCalendarRows(firstDayOfMonth.getDay(), lastDayOfMonth.getDate()));
   };
 
   const incrementMonthAction = () => {
@@ -73,7 +74,7 @@ const Calendar = () => {
     }
     setFirstDayOfMonth(getFirstDayOfMonth(currentDate));
     setLastDayOfMonth(getLastDayOfMonth(currentDate));
-    setCalendarData(firstDayOfMonth.getDay(), lastDayOfMonth.getDate());
+    setCalendarData(createCalendarRows(firstDayOfMonth.getDay(), lastDayOfMonth.getDate()));
   };
 
   console.log("firstDayOfMonth", firstDayOfMonth);
@@ -88,13 +89,15 @@ const Calendar = () => {
        return <td key={index}>{dayName}</td>
     })
 
-  const getSchduleDate = () => {
-    // let selectedDate = date;
-    // let selectedMonth = months[month];
-    // let selectedYear = year;
+  const getSchduleDate = (date, index) => {
+    let selectedDate = date;
+    let selectedMonth = months[month];
+    let selectedYear = year;
     // alert(`your selected date is ${selectedDate} ${selectedMonth} ${selectedYear}`)
+    setSelected(date)
     
   }
+  console.log(calendarData)
 
   return (
       <div className={styles.calendarMainDiv}>
@@ -121,7 +124,7 @@ const Calendar = () => {
                       {calendarData.map((row, index) => (
                           <tr key={index}>
                               {row.map((date, index) => (
-                              <td key={index} onClick={getSchduleDate}>{date !== 0 ? date : ""}</td>
+                              <td key={index} onClick={() => {getSchduleDate(date)}} style={{backgroundColor:selected==date ? "yellow" : "black" }}>{date !== 0 ? date : ""}</td>
                               ))}
                           </tr>
                       ))}
