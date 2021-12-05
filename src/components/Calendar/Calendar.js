@@ -91,7 +91,7 @@ const Calendar = () => {
        return <td key={index}>{dayName}</td>
     })
 
-  const getSchduleDate = (date, index) => {
+  const getSchduleDate = (date) => {
     let selectedDate = date;
     let selectedMonth = months[month];
     let selectedYear = year;
@@ -113,7 +113,7 @@ const Calendar = () => {
     setMinutes(e.target.value)
   }
 
-  const schduledTime = () => {
+  const schduledDataAnTime = () => {
     alert(`Your schduled Date and Time is: ${selected.date} ${selected.month}, ${selected.year} ${hour}:${minutes}`)
   }
 
@@ -165,7 +165,7 @@ const Calendar = () => {
             </div>
           </div>
           <div className={styles.applyButton}>
-            <button onClick={schduledTime}>Apply</button>
+            <button onClick={schduledDataAnTime}>Apply</button>
           </div>
         </div>
       </div>
