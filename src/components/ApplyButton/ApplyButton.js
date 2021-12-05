@@ -4,7 +4,7 @@ import styles from '../ApplyButton/ApplyButton.module.css'
 const ApplyButton = () => {
     return (
         <div className={styles.applyButton}>
-            <button>Apply</button>
+            <button >Apply</button>
         </div>
     )
 }

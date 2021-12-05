@@ -51,7 +51,7 @@ const Calendar = () => {
   const [calendarData, setCalendarData] = useState(
     createCalendarRows(firstDayOfMonth.getDay(), lastDayOfMonth.getDate())
   );
-  const [selected, setSelected] = useState(null)
+  const [selected, setSelected] = useState([])
 
   const decrementMonthAction = () => {
     setMonth((month) => (month === 0 ? (month = 11) : --month));
@@ -94,10 +94,13 @@ const Calendar = () => {
     let selectedMonth = months[month];
     let selectedYear = year;
     // alert(`your selected date is ${selectedDate} ${selectedMonth} ${selectedYear}`)
-    setSelected(date)
+    let selectedData = {"date": selectedDate, "month":selectedMonth,"year": selectedYear}
+    console.log("selectedData************************",selectedData)
+    setSelected(selectedData)
+    
     
   }
-  console.log(calendarData)
+  console.log("selected************************",selected.date, selected.month, selected.year)
 
   return (
       <div className={styles.calendarMainDiv}>
@@ -124,7 +127,7 @@ const Calendar = () => {
                       {calendarData.map((row, index) => (
                           <tr key={index}>
                               {row.map((date, index) => (
-                              <td key={index} onClick={() => {getSchduleDate(date)}} style={{backgroundColor:selected==date ? "yellow" : "black" }}>{date !== 0 ? date : ""}</td>
+                              <td key={index} onClick={() => {getSchduleDate(date)}} style={{backgroundColor:selected?.date==date && selected?.month == months[month] && selected?.year == year ? "yellow" : "black" }}>{date !== 0 ? date : ""}</td>
                               ))}
                           </tr>
                       ))}
