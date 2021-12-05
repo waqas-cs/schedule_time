@@ -52,6 +52,8 @@ const Calendar = () => {
     createCalendarRows(firstDayOfMonth.getDay(), lastDayOfMonth.getDate())
   );
   const [selected, setSelected] = useState([])
+  const [hour, setHour] = useState("")
+  const [minutes, setMinutes] = useState("")
 
   const decrementMonthAction = () => {
     setMonth((month) => (month === 0 ? (month = 11) : --month));
@@ -93,14 +95,27 @@ const Calendar = () => {
     let selectedDate = date;
     let selectedMonth = months[month];
     let selectedYear = year;
-    // alert(`your selected date is ${selectedDate} ${selectedMonth} ${selectedYear}`)
     let selectedData = {"date": selectedDate, "month":selectedMonth,"year": selectedYear}
-    console.log("selectedData************************",selectedData)
     setSelected(selectedData)
-    
-    
   }
-  console.log("selected************************",selected.date, selected.month, selected.year)
+
+
+  const date = new Date();
+  let uts = date.getTimezoneOffset();
+  uts = uts * -1; // convert negative to postive
+  uts = uts / 60; //covert minutes to hours
+  
+
+  const hourChangeHandler = e=> {
+    setHour(e.target.value)
+  }
+  const minutesChangeHandler = e=> {
+    setMinutes(e.target.value)
+  }
+
+  const schduledTime = () => {
+    alert(`Your schduled Date and Time is: ${selected.date} ${selected.month}, ${selected.year} ${hour}:${minutes}`)
+  }
 
   return (
       <div className={styles.calendarMainDiv}>
@@ -127,7 +142,7 @@ const Calendar = () => {
                       {calendarData.map((row, index) => (
                           <tr key={index}>
                               {row.map((date, index) => (
-                              <td key={index} onClick={() => {getSchduleDate(date)}} style={{backgroundColor:selected?.date==date && selected?.month == months[month] && selected?.year == year ? "yellow" : "black" }}>{date !== 0 ? date : ""}</td>
+                              <td key={index} onClick={() => {getSchduleDate(date)}} style={{backgroundColor:selected?.date==date && selected?.month == months[month] && selected?.year == year ? "yellow" : '#444444' }}>{date !== 0 ? date : ""}</td>
                               ))}
                           </tr>
                       ))}
@@ -135,6 +150,24 @@ const Calendar = () => {
                   </table>
               </div>
           </div>
+          <div className={styles.selectTimeMain}>
+          <div className={styles.selectTime}>
+            <div className={styles.selectTimeContent}>
+              <h4>Select Time</h4>
+              <span>
+                Your time <br /> zone is UTC+{uts}
+              </span>
+            </div>
+            <div className={styles.selectTimeInput}>
+              <input type="text" placeholder="00" maxLength="2" value={hour} onChange={hourChangeHandler}/>
+              <span className={styles.secondsDots}> : </span>
+              <input type="text" placeholder="00" maxLength="2" value={minutes} onChange={minutesChangeHandler} />
+            </div>
+          </div>
+          <div className={styles.applyButton}>
+            <button onClick={schduledTime}>Apply</button>
+          </div>
+        </div>
       </div>
   )
 }
